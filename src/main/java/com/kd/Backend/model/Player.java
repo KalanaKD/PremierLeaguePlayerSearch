@@ -115,4 +115,22 @@ public class Player {
     public void setPenalties(Integer penalties) {
         this.penalties = penalties;
     }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "name='" + name + '\'' +
+                ", age='" + age + '\'' +
+                ", position='" + position + '\'' +
+                ", club=" + club +
+                ", matchesPlayed=" + matchesPlayed +
+                ", nation=" + nation +
+                ", appearances=" + appearances +
+                ", goals=" + goals +
+                ", assists=" + assists +
+                ", penalties=" + penalties +
+                ", yellowCards=" + yellowCards +
+                ", redCards=" + redCards +
+                '}';
+    }
 }
