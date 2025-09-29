@@ -2,15 +2,22 @@ package com.kd.Backend.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "player_data")
 public class Player {
 
     @Id
-    @Column(name = "full_name", unique = true)
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "full_name")
     private String name;
     private String nation;
     private String position;
@@ -41,78 +48,6 @@ public class Player {
         this.yellowCards = yellowCards;
         this.redCards = redCards;
         this.matchesPlayed = matchesPlayed;
-        this.penalties = penalties;
-    }
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getNation() {
-        return nation;
-    }
-    public void setNation(String nation) {
-        this.nation = nation;
-    }
-    public String getPosition() {
-        return position;
-    }
-    public void setPosition(String position) {
-        this.position = position;
-    }
-    public String getClub() {
-        return club;
-    }
-    public void setClub(String club) {
-        this.club = club;   
-    }
-    public Integer getAge() {
-        return age;
-    }
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-    public Integer getAppearances() {
-        return appearances;
-    }
-    public void setAppearances(Integer appearances) {
-        this.appearances = appearances; 
-    }
-    public Integer getGoals() {
-        return goals;
-    }
-    public void setGoals(Integer goals) {
-        this.goals = goals;
-    }
-    public Integer getAssists() {
-        return assists;
-    }
-    public void setAssists(Integer assists) {
-        this.assists = assists;
-    }
-    public Integer getYellowCards() {
-        return yellowCards;
-    }
-    public void setYellowCards(Integer yellowCards) {
-        this.yellowCards = yellowCards;
-    }
-    public Integer getRedCards() {
-        return redCards;
-    }
-    public void setRedCards(Integer redCards) {
-        this.redCards = redCards;
-    }
-    public Integer getMatchesPlayed() {
-        return matchesPlayed;
-    }
-    public void setMatchesPlayed(Integer matchesPlayed) {   
-        this.matchesPlayed = matchesPlayed;
-    }
-    public Integer getPenalties() {
-        return penalties;
-    }
-    public void setPenalties(Integer penalties) {
         this.penalties = penalties;
     }
 
