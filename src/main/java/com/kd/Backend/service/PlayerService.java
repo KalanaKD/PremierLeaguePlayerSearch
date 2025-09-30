@@ -27,7 +27,7 @@ public class PlayerService {
 
     public List<Player> getPlayersFromClub(String club){
         return playerRepo.findAll().stream()
-            .filter(player -> club.equals(player.getClub()))
+            .filter(player -> player.getClub() != null && player.getClub().toLowerCase().contains(club.toLowerCase()))
             .collect(Collectors.toList());
     }
     
@@ -58,15 +58,22 @@ public class PlayerService {
         return player ;
     }
     public Player updatePlayer(Player updatedPlayer){
-        Optional<Player> existingPlayer = playerRepo.findByName(updatedPlayer.getName());
+        Optional<Player> existingPlayer = playerRepo.findById(updatedPlayer.getId());
 
         if(existingPlayer.isPresent()){
             Player playerToUpdate = existingPlayer.get();
             playerToUpdate.setName(updatedPlayer.getName());
-            playerToUpdate.setClub(updatedPlayer.getClub());
-            playerToUpdate.setPosition(updatedPlayer.getPosition());
             playerToUpdate.setNation(updatedPlayer.getNation());
+            playerToUpdate.setPosition(updatedPlayer.getPosition());
+            playerToUpdate.setClub(updatedPlayer.getClub());
             playerToUpdate.setAge(updatedPlayer.getAge());
+            playerToUpdate.setAppearances(updatedPlayer.getAppearances());
+            playerToUpdate.setGoals(updatedPlayer.getGoals());
+            playerToUpdate.setAssists(updatedPlayer.getAssists());
+            playerToUpdate.setYellowCards(updatedPlayer.getYellowCards());
+            playerToUpdate.setRedCards(updatedPlayer.getRedCards());
+            playerToUpdate.setMatchesPlayed(updatedPlayer.getMatchesPlayed());
+            playerToUpdate.setPenalties(updatedPlayer.getPenalties());
 
             playerRepo.save(playerToUpdate);
             return playerToUpdate;
@@ -77,5 +84,17 @@ public class PlayerService {
     @Transactional
     public void deletePlayer(String name){
         playerRepo.deleteByName(name);
+    }
+    public List<String> getAllPositions() {
+        return playerRepo.findDistinctPositions();
+    }
+
+    @Transactional
+    public Player getPlayerById(long id) {
+        return playerRepo.findById(id).orElse(null);
+    }
+
+    public void deletePlayerById(long id) {
+        playerRepo.deleteById(id);
     }
 }
